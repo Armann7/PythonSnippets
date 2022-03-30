@@ -1,1 +1,3 @@
 pytest
+# tesserocr - инсталляция для win и linux разная.
+# См. https://pypi.org/project/tesserocr/
