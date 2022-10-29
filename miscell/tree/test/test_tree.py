@@ -1,5 +1,5 @@
 import pytest
-from tree import tree
+from miscell.tree import tree
 import testdata
 
 
