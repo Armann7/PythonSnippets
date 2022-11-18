@@ -1,48 +1,28 @@
 from typing import List, Optional
 
 
-class ListNode:
-    def __init__(self, val=0, next_node=None):
-        self.val = val
-        self.next_node = next_node
-
-    def __str__(self):
-        if self.next_node is not None:
-            return f"{str(self.val)} {str(self.next_node)} "
-        return f"{str(self.val)}"
-
-
 class Solution:
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+    def mergeKLists(self, lists: List[list]) -> Optional[list]:
         if lists is None or len(lists) == 0:
-            return None
-        for item in lists:
-            if not isinstance(item, ListNode):
-                return None
+            return []
 
-        head = tail = None
+        result = []
         while len(lists) > 0:
-            index_min = min(range(len(lists)), key=lambda i: lists[i].val)
-            if index_min == -1:
-                return None
-            head = lists[index_min] if head is None else head
-            if tail is None:
-                tail = lists[index_min]
-            else:
-                tail.next_node, tail = lists[index_min], lists[index_min]
-
-            lists[index_min] = lists[index_min].next_node
-            if lists[index_min] is None:
+            index_min = min(range(len(lists)), key=lambda i: lists[i][0] if len(lists[i]) > 0 else None)
+            if len(lists[index_min]) > 0:
+                result.append(lists[index_min].pop(0))
+            if len(lists[index_min]) == 0:
                 del lists[index_min]
 
-        return head
+        return result
 
 
 if __name__ == "__main__":
-    llist1 = ListNode(0, (ListNode(3, ListNode(8, ListNode(13, ListNode(14, ListNode(25)))))))
-    llist2 = ListNode(4, (ListNode(7, ListNode(12, ListNode(31, ListNode(40, ListNode(51)))))))
-    llist3 = ListNode(3, (ListNode(4, ListNode(8, ListNode(11, ListNode(12, ListNode(22)))))))
+    final_list = Solution().mergeKLists([[1, 4, 5, 9], [1, 3, 4, 6], [2, 6]])
+    print(final_list)
 
-    # final_list = Solution().mergeKLists([llist1, llist2, llist3])
+    final_list = Solution().mergeKLists([])
+    print(final_list)
+
     final_list = Solution().mergeKLists([[]])
     print(final_list)
