@@ -1,8 +1,6 @@
 """2. Add Two Numbers"""
 from typing import Iterable, Optional
 
-
-# Definition for single-linked list and iterator
 class ListIter:
     def __init__(self, node: "ListNode"):
         self.first_node = node
